@@ -229,7 +229,7 @@ function si_register_types(){
         'menu_position'       => 20,
         'menu_icon'           => 'dashicons-text-page', 
         'hierarchical'        => false,
-        'supports'            => ['title'],
+        'supports'            => ['title' ],
         'has_archive' => true
     ]);
 
