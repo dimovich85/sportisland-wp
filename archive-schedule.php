@@ -54,7 +54,7 @@
               <h2 class="sr-only"><?php echo $day->description; ?></h2>
               <ul class="schedule tabs-content__list">
               <?php
-                $actions = [];
+                $actions = 
                 foreach( $actions as $act ):
               ?>
                 <li class="schedule__item">
@@ -66,7 +66,7 @@
               <?
                 endforeach;
               ?>
-              <li class="schedule__item">
+                <!-- <li class="schedule__item">
                   <p class="schedule__time"> 07:00 - 22:00 </p>
                   <h2 class="schedule__h"> Фитнесс </h2>
                   <p class="schedule__trainer"> с Литвиненко Ольгой </p>
@@ -107,13 +107,7 @@
                   <h2 class="schedule__h"> Фитнесс </h2>
                   <p class="schedule__trainer"> с Литвиненко Ольгой </p>
                   <p class="schedule__place"> фитнесс зал </p>
-                </li>
-                <li class="schedule__item">
-                  <p class="schedule__time"> 07:00 - 22:00 </p>
-                  <h2 class="schedule__h"> Фитнесс </h2>
-                  <p class="schedule__trainer"> с Литвиненко Ольгой </p>
-                  <p class="schedule__place"> фитнесс зал </p>
-                </li>
+                </li> -->
               </ul>
             </li>
           <?php
