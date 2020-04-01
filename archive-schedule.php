@@ -42,7 +42,7 @@
             $index = 0;
             foreach( $days as $day ):
               if( $index === 0 ){
-                $active_class = 'active-tab';
+                $active_class = ' active-tab';
               } else{
                 $active_class = '';
               }
@@ -54,17 +54,49 @@
               <h2 class="sr-only"><?php echo $day->description; ?></h2>
               <ul class="schedule tabs-content__list">
               <?php
-                $actions = 
-                foreach( $actions as $act ):
+                $actions = new WP_Query([
+                  'posts_per_page' => -1,
+                  'post_type' => 'schedule',
+                  'schedule_days' => $day->slug,
+                  'meta_key' => 'schedule_time_start',
+                  'orderby' => 'meta_value_num',
+                  'order' => 'ASC'
+                ]);
+                if( $actions->have_posts() ):
+                  while( $actions->have_posts() ):
+                    $actions->the_post();
+                    $trainer = esc_html(
+                      get_the_title(
+                        get_field('schedule_trainer')
+                      )
+                    );
+                    $place = get_the_terms($id, 'places')[0];
+                    $color = get_field('place_color', 'places_' . $place->term_id);
               ?>
                 <li class="schedule__item">
-                  <p class="schedule__time"> 07:00 - 22:00 </p>
-                  <h2 class="schedule__h"> Фитнесс </h2>
-                  <p class="schedule__trainer"> с Литвиненко Ольгой </p>
-                  <p class="schedule__place"> фитнесс зал </p>
+                  <p class="schedule__time"> 
+                    <?php the_field('schedule_time_start'); ?> 
+                      &ndash; 
+                    <?php the_field('schedule_time_end'); ?> 
+                  </p>
+                  <h2 class="schedule__h">
+                    <?php the_field('schedule_name'); ?>
+                  </h2>
+                  <p class="schedule__trainer"> 
+                    с 
+                    <?php echo $trainer; ?> 
+                  </p>
+                  <p 
+                    class="schedule__place"
+                    style="color: <?php echo $color; ?>;"
+                  >
+                    <?php echo $place->name; ?>
+                  </p>
                 </li>
               <?
-                endforeach;
+                  endwhile;
+                wp_reset_postdata();
+                endif;
               ?>
                 <!-- <li class="schedule__item">
                   <p class="schedule__time"> 07:00 - 22:00 </p>
