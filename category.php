@@ -26,7 +26,7 @@
                 aria-label="Читать текст статьи: <?php the_title(); ?>"
               >
                 <figure class="last-post__thumb">
-                  <?php the_post_thumbnail( 'full', ['class' => 'last-post__img']); ?>
+                  <?php the_post_thumbnail( 'post-thumbnail', ['class' => 'last-post__img']); ?>
                 </figure>
                 <div class="last-post__wrap">
                   <h3 class="last-post__h">

@@ -18,9 +18,17 @@
             if( $custom_thumb ){
               $url = $custom_thumb['url'];
               $alt = $custom_thumb['alt'];
-              echo "<img src=\"$url\" alt=\"$alt\" class=\"main-article__thumb\">";
+?>
+              <picture>
+                <source 
+                  srcset="<?php echo $custom_thumb['sizes']['si_pic']; ?>"
+                  media="(max-width: 600px)"
+                >
+                <img src="<?php echo $url; ?>" alt="<?php echo $alt; ?>" class="main-article__thumb">
+              </picture>
+<?php
             } else{
-              the_post_thumbnail('full', ['class'=> 'main-article__thumb']);
+              the_post_thumbnail('post-thumbnail', ['class'=> 'main-article__thumb']);
             }
           ?>
           <h1 class="main-article__h">
