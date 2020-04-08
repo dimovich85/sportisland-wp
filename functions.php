@@ -26,6 +26,8 @@ add_action('wp_ajax_nopriv_post-likes', 'si_likes');
 add_action('wp_ajax_post-likes', 'si_likes');
 add_shortcode( 'si-paste-link', 'si_paste_link' );
 add_action('manage_posts_custom_column', 'si_like_column', 5, 2);
+add_action('wp_head', 'si_analytics');
+
 
 add_filter('show_admin_bar', '__return_false');
 add_filter('manage_posts_columns', 'si_add_col_likes');
@@ -47,6 +49,20 @@ remove_action('wp_print_styles', 'print_emoji_styles');
 
 //////
 
+
+function si_analytics(){
+?>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163150279-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-163150279-1');
+    </script>
+<?php
+}
 
 function si_setup(){
     register_nav_menu( 'menu-header', 'Меню в шапке' );
@@ -203,40 +219,40 @@ function si_register_types(){
     ]);
 
     register_taxonomy('schedule_days', ['schedule'], [
-		'labels'                => [
-			'name'              => 'Дни недели',
-			'singular_name'     => 'День',
-			'search_items'      => 'Найти день недели',
-			'all_items'         => 'Все дни недели',
-			'view_item '        => 'Посмотреть дни недели',
-			'edit_item'         => 'Редактировать дни недели',
-			'update_item'       => 'Обновить',
-			'add_new_item'      => 'Добавить день недели',
-			'new_item_name'     => 'Добавить день недели',
-			'menu_name'         => 'Все дни недели',
-		],
-		'description'           => '',
-		'public'                => true,
-		'hierarchical'          => true
+        'labels'                => [
+            'name'              => 'Дни недели',
+            'singular_name'     => 'День',
+            'search_items'      => 'Найти день недели',
+            'all_items'         => 'Все дни недели',
+            'view_item '        => 'Посмотреть дни недели',
+            'edit_item'         => 'Редактировать дни недели',
+            'update_item'       => 'Обновить',
+            'add_new_item'      => 'Добавить день недели',
+            'new_item_name'     => 'Добавить день недели',
+            'menu_name'         => 'Все дни недели',
+        ],
+        'description'           => '',
+        'public'                => true,
+        'hierarchical'          => true
     ]);
     
     register_taxonomy('places', ['schedule'], [
-		'labels'                => [
-			'name'              => 'Залы',
-			'singular_name'     => 'Зал',
-			'search_items'      => 'Найти залы',
-			'all_items'         => 'Все залы',
-			'view_item '        => 'Посмотреть залы',
-			'edit_item'         => 'Редактировать залы',
-			'update_item'       => 'Обновить',
-			'add_new_item'      => 'Добавить залы',
-			'new_item_name'     => 'Добавить залы',
-			'menu_name'         => 'Все залы',
-		],
-		'description'           => '',
-		'public'                => true,
-		'hierarchical'          => true
-	]);
+        'labels'                => [
+            'name'              => 'Залы',
+            'singular_name'     => 'Зал',
+            'search_items'      => 'Найти залы',
+            'all_items'         => 'Все залы',
+            'view_item '        => 'Посмотреть залы',
+            'edit_item'         => 'Редактировать залы',
+            'update_item'       => 'Обновить',
+            'add_new_item'      => 'Добавить залы',
+            'new_item_name'     => 'Добавить залы',
+            'menu_name'         => 'Все залы',
+        ],
+        'description'           => '',
+        'public'                => true,
+        'hierarchical'          => true
+    ]);
 
     register_post_type( 'prices', [
         'labels' => [
